@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MakeListFromRange {
+public class CreateListFromRange {
     public static void main(String[] args) {
 
         // 스트림을 이용해서 숫자 범위를 리스트로 만들기

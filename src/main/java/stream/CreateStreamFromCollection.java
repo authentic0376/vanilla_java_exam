@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
 
-public class MakeStreamFromCollection {
+public class CreateStreamFromCollection {
     public static void main(String[] args) {
          // 모든 컬렉션은 스트림으로 만들 수 있다
         Collection<String> collection = Arrays.asList("a", "b", "c");
