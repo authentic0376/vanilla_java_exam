@@ -1,10 +1,12 @@
 package stream;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CreateListFromRange {
+    // 숫자 범위를 리스트나 배열로 만드는 예제
     public static void main(String[] args) {
 
         // 스트림을 이용해서 숫자 범위를 리스트로 만들기
@@ -25,6 +27,10 @@ public class CreateListFromRange {
         // 스트림을 이용해서 숫자 범위를 배열로 만들기
         int[] intArray = IntStream.range(0, 10).toArray();
         System.out.println(toString(intArray));
+
+        // toString을 직접 만들지 않고 array를 collection으로 변환해서 출력하기
+        List<Integer> intList = Arrays.stream(intArray).boxed().toList(); //.collect(Collectors.toList()); 간소화
+        System.out.println(intList);
     }
 
     public static String toString(int[] array) {
