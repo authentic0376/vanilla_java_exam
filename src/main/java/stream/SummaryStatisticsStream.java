@@ -27,5 +27,10 @@ public class SummaryStatisticsStream {
 
         System.out.println("statistics = " + statistics);
         // statistics = IntSummaryStatistics{count=5, sum=86, min=13, average=17.200000, max=23}
+
+        System.out.println("statistics.getSum() = " + statistics.getSum());
+        System.out.println("statistics.getAverage() = " + statistics.getAverage());
+        System.out.println("statistics.getCount() = " + statistics.getCount());
+        System.out.println("statistics.getMax() = " + statistics.getMax());
     }
 }
