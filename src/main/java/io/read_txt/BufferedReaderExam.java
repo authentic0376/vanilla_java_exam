@@ -28,34 +28,62 @@ public class BufferedReaderExam {
          * but when tested with larger files, BufferedReader consistently outperformed FileReader.
          */
 
-        URL fileURL = BufferedReaderExam.class.getClassLoader().getResource("io/20mb-examplefile-com.txt");
+        // BufferedReader and InputStreamReader speed comparison
+        {
+            URL fileURL = BufferedReaderExam.class.getClassLoader().getResource("io/20mb-examplefile-com.txt");
 
-        if (fileURL != null) {
-            try {
-                long startTime, endTime;
+            if (fileURL != null) {
+                try {
+                    long startTime, endTime;
 
-                // Using BufferedReader
-                startTime = System.nanoTime();
-                try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileURL.getFile()))) {
-                    readFileContent(bufferedReader); // Read content without printing
+                    // Using BufferedReader
+                    startTime = System.nanoTime();
+                    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileURL.getFile()))) {
+                        readFileContent(bufferedReader); // Read content without printing
+                    }
+                    endTime = System.nanoTime();
+                    System.out.println("BufferedReader time: " + String.format("%,d", (endTime - startTime)) + " ns");
+
+                    // Using FileReader only
+                    startTime = System.nanoTime();
+                    try (FileReader fileReader = new FileReader(fileURL.getFile())) {
+                        readFileContent(fileReader); // Read content without printing
+                    }
+                    endTime = System.nanoTime();
+                    System.out.println("FileReader time: " + String.format("%,d", (endTime - startTime)) + " ns");
+
+                } catch (IOException e) {
+                    LOGGER.log(Level.SEVERE, "An error occurred while reading the file", e);
                 }
-                endTime = System.nanoTime();
-                System.out.println("BufferedReader time: " + String.format("%,d", (endTime - startTime)) + " ns");
 
-                // Using FileReader only
-                startTime = System.nanoTime();
-                try (FileReader fileReader = new FileReader(fileURL.getFile())) {
-                    readFileContent(fileReader); // Read content without printing
-                }
-                endTime = System.nanoTime();
-                System.out.println("FileReader time: " + String.format("%,d", (endTime - startTime)) + " ns");
-
-            } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "An error occurred while reading the file", e);
+            } else {
+                System.out.println("Resource Not Found!");
             }
+        }
 
-        } else {
-            System.out.println("Resource Not Found!");
+        /*
+         * BufferedReader.readLine()
+         * InputStreamReader or FileReader do not have the readLine() method.
+         */
+        System.out.println("---------------------------------------");
+        {
+            URL fileURL = BufferedReaderExam.class.getClassLoader().getResource("io/input.txt");
+
+            if (fileURL != null) {
+                try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileURL.getFile()))) {
+                    String str;
+
+                    while ((str = bufferedReader.readLine()) != null) {
+                        System.out.println(str);
+                    }
+
+                } catch (IOException e) {
+                    LOGGER.log(Level.SEVERE, "An error occurred while reading the file", e);
+                }
+
+            } else {
+                System.out.println("Resource Not Found!");
+            }
         }
     }
 
