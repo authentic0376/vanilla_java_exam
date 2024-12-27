@@ -28,7 +28,7 @@ public class BufferedReaderExam {
          * but when tested with larger files, BufferedReader consistently outperformed FileReader.
          */
 
-        URL fileURL = BufferedReaderExam.class.getClassLoader().getResource("io/input.txt");
+        URL fileURL = BufferedReaderExam.class.getClassLoader().getResource("io/20mb-examplefile-com.txt");
 
         if (fileURL != null) {
             try {
